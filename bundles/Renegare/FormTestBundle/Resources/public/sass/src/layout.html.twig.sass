@@ -1,0 +1,84 @@
+/* Variables */
+
+$text_c: #333333
+$text_faded_c: #999999
+
+$focus_glow_c: #2e7be3
+
+$yellow_c: #fff991
+$orange_c: #e55322
+$red_c: #af2003
+
+$gradient_c1_1: #edf1e4
+$gradient_c1_2: #ccd8cb
+
+$gradient_c2_1: #fff991
+$gradient_c2_2: #be9808
+
+/* Functions */
+@mixin curve_borders($size)
+	border-radius: $size+px
+	-moz-border-radius: $size+px
+	-webkit-border-radius: $size+px
+	border-radius: $size+px
+/*	behavior: url(PIE.htc) */
+
+@mixin box_glow($size, $glow_c: $focus_glow_c)
+	box-shadow: 0 0 $size+px $glow_c
+	-webkit-box-shadow: 0 0 $size+px $glow_c
+	-moz-box-shadow: 0 0 $size+px $glow_c
+
+@mixin linear_gradient($colour_1, $colour_2, $default: $gradient_c1_1)
+	background-color: $default
+	background: -moz-linear-gradient(100% 100% 90deg, $colour_2, $colour_1)
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from($colour_1), to($colour_2))
+	background: -webkit-linear-gradient($colour_1, $colour_2)
+	background: -o-linear-gradient($colour_2, $colour_1)
+
+
+.transaction-create
+
+#steps-wrapper
+	list-style: none
+	padding: 0px
+	margin: 10px
+	border: solid 1px #000
+	overflow: hidden
+	position: relative
+	
+	.step
+		display: block
+		padding: 10px
+		
+
+ul
+	list-style: none
+	color: red
+	padding: 0
+	margin: 0
+	
+form
+	.field
+		.prototype
+			display: none
+		
+	.collection-field
+		margin: 0
+			bottom: 50px
+		overflow: hidden
+		border: 1px solid #ccc
+		padding: 10px
+		.field
+			float: left
+		.collection-field
+			margin: 10px
+			float: right
+			.field
+				float: none
+				display: block
+				padding: 10px
+				margin: 10px
+				border: 1px solid #ccc
+				.field
+					float: left
+				

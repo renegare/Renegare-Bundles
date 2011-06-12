@@ -1,0 +1,52 @@
+{% form_theme form _self %}
+{% use 'RenegareFormTestBundle:_forms:form.html.twig' %}
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Form Test</title>
+		
+		{% stylesheets filter='?yui_css' 
+			'@RenegareFormTestBundle/Resources/public/sass/src/layout.html.twig.sass'
+		%}
+			<link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}" />
+		{% endstylesheets %}
+		
+		{% javascripts filter='?closure' 
+			'@RenegareFormTestBundle/Resources/public/js/src/jquery-1.6.min.js'
+			'@RenegareFormTestBundle/Resources/public/js/src/jquery.tmpl.js' 
+			'@RenegareFormTestBundle/Resources/public/js/src/jquery.addslashes.js'
+			'@RenegareFormTestBundle/Resources/public/js/src/jquery.hasAttr.js'
+			'@RenegareFormTestBundle/Resources/public/js/src/jquery.symfony2form.js'
+		%}
+			<script src="{{ asset_url }}"></script>
+		{% endjavascripts %}
+		
+	</head>
+	<body>
+			
+		<div class="main-content">
+
+
+			<div id="product-form">
+				<form method="post" action="{{ path('multi_products_features') }}">
+				
+						{{ form_errors(form) }}
+						
+						{{ form_rest(form) }}
+						
+						<input type="submit" />
+						
+				</form>
+		</div>
+		
+		
+				<script>
+					(function($){
+						
+						$('#product-form').symfony2form({});
+					
+					})(jQuery);
+				</script>
+
+	</body>
+</html>

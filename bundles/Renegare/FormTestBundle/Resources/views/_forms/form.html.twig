@@ -1,0 +1,67 @@
+{% use 'div_layout.html.twig' %}
+
+{# Added the ability to add specific classes to field container depending on type #}
+{# Wrapped all widget's with a container so there is some generic way of finding the widget. Depending on the 
+		field type you then handle the children/child of the widget container #}
+		
+{% block field_row %}
+{% spaceless %}
+		{% set field_type = field_type|default(false) %}
+ 		{% set prototype = ( name == '$$name$$' ? true : false ) %}
+ 		
+ 		{% if prototype %}
+	 		<script id="{{ form.parent.get('id') }}_prototype"  type="text/x-jquery-tmpl" class="prototype">
+ 		{% endif %}
+    <div class="field {% if field_type %} {{ field_type }}-field{% endif %}">		
+    		{% if prototype or form.hasParent() and form.parent.get('allow_delete')  %}
+    		{{ block('field_button_delete') }}
+    		{% endif %}
+    		
+        {% if not prototype %} {{ form_label(form) }} {% endif %}
+        {{ form_errors(form) }}
+        {% if allow_add is defined %}
+    			{{ block('field_button_add') }}
+    		{% endif %}
+        <div class="widget">{{ form_widget(form) }}</div>
+    </div>
+ 		{% if prototype %}
+	 		</script>
+ 		{% endif %}
+{% endspaceless %}
+{% endblock field_row %}
+
+
+{# adding the collection class name to the field container #}
+{% block collection_row %}
+{% spaceless %}
+		{% set field_type = field_type|default('collection') %}
+		{{ block('field_row') }}
+{% endspaceless %}
+{% endblock collection_row %}
+
+
+
+{# Error container should be visible so it can be updated by javascript #}
+{# Note: duplicate error containers appear within the widget containers #}
+{% block field_errors %}
+{% spaceless %}
+    <ul id="{{ id }}_errors" class="errors">
+    {% if errors|length > 0 %}
+        {% for error in errors %}
+            <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+        {% endfor %}
+    {% endif %}
+    </ul>
+{% endspaceless %}
+{% endblock field_errors %}
+
+
+
+{% block field_button_add %}
+	<button class="add-item">Add Item</button>
+{% endblock %}
+
+
+{% block field_button_delete %}
+<button class="delete-item">Delete Item</button>
+{% endblock %}
