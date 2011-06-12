@@ -16,7 +16,7 @@ class MultiProductType extends AbstractType
         $builder->add('products', 'collection',array(
         	'type' => new ProductType(),
         	'allow_add' => true,
-        	'allow_delete' => false,
+        	'allow_delete' => true,
         	'error_bubbling' => false
         ));
     }
